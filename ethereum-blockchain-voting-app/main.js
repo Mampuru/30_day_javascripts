@@ -231,3 +231,34 @@ const voteStatus = async() => {
         status.innerHTML = "Please connect metamask first";
     }
 }
+
+const getAllCandidates = async() => {
+    if(WALLET_CONNECTED != 0) {
+        var p3 = document.getElementById("p3");
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        await provider.send("eth_requestAccounts", []);
+        const signer = provider.getSigner();
+        const contractInstance = new ethers.Contract(contractAddress, contractAbi, signer);
+        p3.innerHTML = "Please wait, getting all the candidates from the voting smart contract";
+        var candidates = await contractInstance.getAllVotesOfCandiates();
+        console.log(candidates);
+        var table = document.getElementById("myTable");
+
+        for (let i = 0; i < candidates.length; i++) {
+            var row = table.insertRow();
+            var idCell = row.insertCell();
+            var descCell = row.insertCell();
+            var statusCell = row.insertCell();
+
+            idCell.innerHTML = i;
+            descCell.innerHTML = candidates[i].name;
+            statusCell.innerHTML = candidates[i].voteCount;
+        }
+
+        p3.innerHTML = "The tasks are updated"
+    }
+    else {
+        var p3 = document.getElementById("p3");
+        p3.innerHTML = "Please connect metamask first";
+    }
+}
