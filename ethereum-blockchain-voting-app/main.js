@@ -211,3 +211,23 @@ const addVote = async() => {
         cand.innerHTML = "Please connect metamask first";
     }
 }
+
+const voteStatus = async() => {
+    if(WALLET_CONNECTED != 0) {
+        var status = document.getElementById("status");
+        var remainingTime = document.getElementById("time");
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        await provider.send("eth_requestAccounts", []);
+        const signer = provider.getSigner();
+        const contractInstance = new ethers.Contract(contractAddress, contractAbi, signer);
+        const currentStatus = await contractInstance.getVotingStatus();
+        const time = await contractInstance.getRemainingTime();
+        console.log(time);
+        status.innerHTML = currentStatus == 1 ? "Voting is currently open" : "Voting is finished";
+        remainingTime.innerHTML = `Remaining time is ${parseInt(time, 16)} seconds`;
+    }
+    else {
+        var status = document.getElementById("status");
+        status.innerHTML = "Please connect metamask first";
+    }
+}
