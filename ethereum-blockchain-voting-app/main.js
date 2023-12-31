@@ -192,3 +192,22 @@ const connectMetamask = async() => {
     var element = document.getElementById("metamasknotification");
     element.innerHTML = "Metamask is connected " + WALLET_CONNECTED;
 }
+
+const addVote = async() => {
+    if(WALLET_CONNECTED != 0) {
+        var name = document.getElementById("vote");
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        await provider.send("eth_requestAccounts", []);
+        const signer = provider.getSigner();
+        const contractInstance = new ethers.Contract(contractAddress, contractAbi, signer);
+        var cand = document.getElementById("cand");
+        cand.innerHTML = "Please wait, adding a vote in the smart contract";
+        const tx = await contractInstance.vote(name.value);
+        await tx.wait();
+        cand.innerHTML = "Vote added !!!";
+    }
+    else {
+        var cand = document.getElementById("cand");
+        cand.innerHTML = "Please connect metamask first";
+    }
+}
