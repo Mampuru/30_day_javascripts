@@ -1,6 +1,6 @@
 # JavaScripts Projects
 
-[![My Skills](https://skillicons.dev/icons?i=js,html,css,d3,express)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=js,html,css,d3,express,mongodb,react,solidity)](https://skillicons.dev)
 
 * **E-Commerce Backend** -> *ExpressJS* e-commerce backend that allow addition,updating,retrieval and delation of products. 
 * **E-Commerce Frontend** -> *ReactJS* e-commerce forntend currently has test data.  
