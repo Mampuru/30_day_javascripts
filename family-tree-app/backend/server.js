@@ -81,6 +81,10 @@ const writeDataToFile = async (data) => {
   await fs.writeFile(filePath, JSON.stringify(data, null, 2));
 };
 
+app.get('/', async (req, res) => {
+  res.json({ message: 'Server is running fine... waitin for instruction' });
+});
+
 app.get('/api/people', async (req, res) => {
   const people = await readDataFromFile();
   res.json(people);
