@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Tree from 'react-d3-tree';
 import axios from 'axios';
 
+const BASEURL = "http://localhost:3001/api/people";
+
 const App = () => {
   const [people, setPeople] = useState([]);
   const [treeData, setTreeData] = useState({});
@@ -12,7 +14,7 @@ const App = () => {
 
   const fetchPeople = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/people');
+      const response = await axios.get(BASEURL);
       setPeople(response.data);
 
       const formattedData = formatTreeData(response.data);
@@ -66,7 +68,7 @@ const App = () => {
       const newPerson = { name, parentId: parentId || null };
 
       try {
-        await axios.post('http://localhost:5000/api/people', newPerson);
+        await axios.post(BASEURL, newPerson);
         fetchPeople();
       } catch (error) {
         console.error('Error adding person', error);
@@ -78,7 +80,7 @@ const App = () => {
     const personId = prompt('Enter the ID of the person to delete:');
     if (personId) {
       try {
-        await axios.delete(`http://localhost:5000/api/people/${personId}`);
+        await axios.delete(`${BASEURL}/${personId}`);
         fetchPeople();
       } catch (error) {
         console.error('Error deleting person', error);
