@@ -65,7 +65,13 @@ const app = express();
 const port = 3001;
 const filePath = path.join(__dirname, 'familyTree.json');
 
-app.use(cors());
+//White list our frontend 
+const corsOptions = {
+  origin: 'http://localhost:3000',
+  optionsSuccessStatus: 200,
+};
+ 
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 const readDataFromFile = async () => {
@@ -82,7 +88,7 @@ const writeDataToFile = async (data) => {
 };
 
 app.get('/', async (req, res) => {
-  res.json({ message: 'Server is running fine... waitin for instruction' });
+  res.json({ message: 'Server is running fine... waiting for instruction' });
 });
 
 app.get('/api/people', async (req, res) => {
