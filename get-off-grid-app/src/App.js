@@ -19,20 +19,39 @@ function App() {
       orientation,
     };
     setResult(inputData);
-   
+
   };
 
   //function to calculate the number of center clamps
-  const centerClampCal = () =>{
+  const centerClampCal = () => {
     var numCenterClamp = 0;
-    console.log("HELLO WORLD");
-    if (numPanels.isNan){
-      return numCenterClamp = numPanels*2-2
+    if (numPanels.isNan) {
+      return numCenterClamp = numPanels * 2 - 2
     }
     return numCenterClamp;
   }
 
- 
+  const railsCal = () => {
+    if (numPanels.isNan) {
+      if (orientation.equal("Portrait")) {
+        if (numPanels % 2 == 0) {
+          return numPanels + 1;
+        } else {
+          return numPanels;
+        }
+      } else if (orientation.equal("Landscape")) {
+        //Needs fixing 
+        if (numPanels % 4 == 0) {
+          return numPanels + 1;
+        } else {
+          return numPanels;
+        }
+      }
+    }
+
+    return 0;
+  }
+
   const handleClear = () => {
     setClientName('');
     setNumPanels('');
