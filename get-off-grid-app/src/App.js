@@ -4,13 +4,10 @@ import React, { useState } from 'react';
 function App() {
   const [clientName, setClientName] = useState('');
   const [numPanels, setNumPanels] = useState('');
-  const [numStrings, setNumStrings] = useState('');
+  const [numStrings, setNumStrings] = useState(1);
   const [orientation, setOrientation] = useState('Portrait');
   const [result, setResult] = useState(null);
-  //Constant value 
-  const ENDCLAMP = 4;
-
-
+  
   const handleCalculate = () => {
     const inputData = {
       clientName,
@@ -22,8 +19,13 @@ function App() {
 
   };
 
+  //Function that calcualtes the number of end clamps
+  const calEndClamps = (numStrings) => {
+    return 4 * numStrings;
+  }
+
   //Function to calculate the number of center clamps
-  const centerClampCal = () => {
+  const calCenterClamps = () => {
     var numCenterClamp = 0;
     if (numPanels.isNan) {
       return numCenterClamp = numPanels * 2 - 2
@@ -32,7 +34,7 @@ function App() {
   }
 
   //Function to calculate the number of rails
-  const railsCal = () => {
+  const calRails = () => {
     if (numPanels.isNan) {
       if (orientation.equal("Landscape")) {
         if (numPanels % 2 === 0) {
@@ -41,7 +43,7 @@ function App() {
           return numPanels + 1;
         }
       } else if (orientation.equal("Portrait")) {
-        //Needs fixing 
+        //NEED FIXING TUNE ME 
         if (numPanels % 4 === 0) {
           return numPanels;
         } else {
@@ -49,22 +51,32 @@ function App() {
         }
       }
     }
-
     return 0;
   }
 
-  const roofHooksCal = (numRails) => {
+  //Function to calculates number of roof hooks
+  const calRoofHooks = (numRails) => {
     if (numRails !== 0 && numRails === 2) {
       return numRails * 5;
     } else if (numRails !== 0 && numRails > 2) {
-      return numRails * 5 - 2;
+      return numRails * 5 - 2; //NEED FIXING TUNE ME 
     }
   }
+
+  //Function that calculates the number of splices
+  const calSplice = (numRails,numStrings) => {
+    if (numRails !== 0 && numRails < 4) {
+      return 0;
+    } else if (numRails !== 0 && numRails > 2) {
+      return numRails * 5 - 2; 
+    }
+  }
+
 
   const handleClear = () => {
     setClientName('');
     setNumPanels('');
-    setNumStrings('');
+    setNumStrings(1);
     setOrientation('Portrait');
     setResult(null);
   };
