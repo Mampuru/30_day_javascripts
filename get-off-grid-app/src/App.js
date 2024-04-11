@@ -33,15 +33,15 @@ function App() {
 
   const railsCal = () => {
     if (numPanels.isNan) {
-      if (orientation.equal("Portrait")) {
-        if (numPanels % 2 == 0) {
+      if (orientation.equal("Landscape")) {
+        if (numPanels % 2 === 0) {
           return numPanels + 1;
         } else {
           return numPanels;
         }
-      } else if (orientation.equal("Landscape")) {
+      } else if (orientation.equal("Portrait")) {
         //Needs fixing 
-        if (numPanels % 4 == 0) {
+        if (numPanels % 4 === 0) {
           return numPanels + 1;
         } else {
           return numPanels;
