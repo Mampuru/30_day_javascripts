@@ -86,6 +86,15 @@ function App() {
         <button onClick={handleCalculate}>Calculate</button>
         <button onClick={handleClear}>Clear</button>
       </div>
+      {result && (
+        <div>
+          <h3>Invoice</h3>
+          <p>Client Name: {result.clientName}</p>
+          <p>Number of Panels: {result.numPanels}</p>
+          <p>Number of Strings: {result.numStrings}</p>
+          <p>Orientation: {result.orientation}</p>
+        </div>
+      )}
     </div>
   );
 }
