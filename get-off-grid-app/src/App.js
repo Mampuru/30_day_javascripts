@@ -19,6 +19,8 @@ function App() {
    
   };
 
+
+
   const handleClear = () => {
     setClientName('');
     setNumPanels('');
@@ -29,6 +31,7 @@ function App() {
 
   return (
     <div>
+      <h1>Get-OFF-Grid Component Calculator</h1>
       <div>
         <label>
           Client Name:
