@@ -5,8 +5,11 @@ function App() {
   const [clientName, setClientName] = useState('');
   const [numPanels, setNumPanels] = useState('');
   const [numStrings, setNumStrings] = useState('');
-  const [orientation, setOrientation] = useState('portrait');
+  const [orientation, setOrientation] = useState('Portrait');
   const [result, setResult] = useState(null);
+  //Constant value 
+  const ENDCLAMP = 4;
+
 
   const handleCalculate = () => {
     const inputData = {
@@ -19,13 +22,22 @@ function App() {
    
   };
 
+  //function to calculate the number of center clamps
+  const centerClampCal = () =>{
+    var numCenterClamp = 0;
+    console.log("HELLO WORLD");
+    if (numPanels.isNan){
+      return numCenterClamp = numPanels*2-2
+    }
+    return numCenterClamp;
+  }
 
-
+ 
   const handleClear = () => {
     setClientName('');
     setNumPanels('');
     setNumStrings('');
-    setOrientation('portrait');
+    setOrientation('Portrait');
     setResult(null);
   };
 
@@ -68,18 +80,18 @@ function App() {
           <label>
             <input
               type="radio"
-              value="portrait"
-              checked={orientation === 'portrait'}
-              onChange={() => setOrientation('portrait')}
+              value="Portrait"
+              checked={orientation === 'Portrait'}
+              onChange={() => setOrientation('Portrait')}
             />
             Portrait
           </label>
           <label>
             <input
               type="radio"
-              value="landscape"
-              checked={orientation === 'landscape'}
-              onChange={() => setOrientation('landscape')}
+              value="Landscape"
+              checked={orientation === 'Landscape'}
+              onChange={() => setOrientation('Landscape')}
             />
             Landscape
           </label>
