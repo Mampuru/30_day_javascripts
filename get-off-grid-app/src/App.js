@@ -22,7 +22,7 @@ function App() {
 
   };
 
-  //function to calculate the number of center clamps
+  //Function to calculate the number of center clamps
   const centerClampCal = () => {
     var numCenterClamp = 0;
     if (numPanels.isNan) {
@@ -31,25 +31,34 @@ function App() {
     return numCenterClamp;
   }
 
+  //Function to calculate the number of rails
   const railsCal = () => {
     if (numPanels.isNan) {
       if (orientation.equal("Landscape")) {
         if (numPanels % 2 === 0) {
-          return numPanels + 1;
-        } else {
           return numPanels;
+        } else {
+          return numPanels + 1;
         }
       } else if (orientation.equal("Portrait")) {
         //Needs fixing 
         if (numPanels % 4 === 0) {
-          return numPanels + 1;
-        } else {
           return numPanels;
+        } else {
+          return numPanels + 1;
         }
       }
     }
 
     return 0;
+  }
+
+  const roofHooksCal = (numRails) => {
+    if (numRails !== 0 && numRails === 2) {
+      return numRails * 5;
+    } else if (numRails !== 0 && numRails > 2) {
+      return numRails * 5 - 2;
+    }
   }
 
   const handleClear = () => {
