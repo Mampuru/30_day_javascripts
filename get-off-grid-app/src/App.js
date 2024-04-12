@@ -8,6 +8,7 @@ function App() {
   const [orientation, setOrientation] = useState('Portrait');
   const [result, setResult] = useState(null);
   const [endClamp, setEndClamp] = useState(null);
+  const [rail, setRails] = useState(null);
   
   const handleCalculate = () => {
     const inputData = {
@@ -19,6 +20,8 @@ function App() {
     setResult(inputData);
     const endClamps = calEndClamps(numStrings);
     setEndClamp(endClamps);
+    const rails = calRails();
+    setRails(rails)
   };
 
   //Function that calcualtes the number of end clamps
@@ -37,14 +40,14 @@ function App() {
 
   //Function to calculate the number of rails
   const calRails = () => {
-    if (numPanels.isNan) {
-      if (orientation.equal("Landscape")) {
+    if (numPanels !== 0) {
+      if (orientation === "Landscape") {
         if (numPanels % 2 === 0) {
           return numPanels;
         } else {
-          return numPanels + 1;
+          return parseInt(numPanels, 10) + 1;
         }
-      } else if (orientation.equal("Portrait")) {
+      } else if (orientation === "Portrait") {
         //NEED FIXING TUNE ME 
         if (numPanels % 4 === 0) {
           return numPanels;
@@ -82,6 +85,7 @@ function App() {
     setOrientation('Portrait');
     setResult(null);
     setEndClamp("");
+    setRails("");
   };
 
   return (
@@ -154,7 +158,7 @@ function App() {
           <p>Orientation: {result.orientation}</p>
 
           <h3>No. Components</h3>
-          <p>{result.clientName} x  Rails</p>
+          <p>{rail} x  Rails</p>
           <p>{endClamp} x  End Clamps</p>
           <p>{result.clientName} x  Center Clamps</p>
           <p>{result.clientName} x  Splices</p>
