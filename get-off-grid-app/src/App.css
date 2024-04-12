@@ -12,18 +12,21 @@
 }
 
 .input-card {
-  background-color: blue;
-  color: yellow;
+  background-color: #032455;
+  color: #eed76d;
+  border-radius: 20px;
 }
 
+
 .output-card {
-  background-color: yellow;
-  color: blue;
+  background-color: #eed76d;
+  color: #032455;
 }
 
 .input-group {
   display: flex;
   flex-direction: column;
+  justify-content: space-between; 
 }
 
 .label {
@@ -31,15 +34,20 @@
 }
 
 .button-group {
+  margin-top: 5%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 button {
-  padding: 10px 20px;
+  padding: 10px 40px;
   cursor: pointer;
   border: none;
-  border-radius: 4px;
+  border-radius: 20px;
+}
+
+input {
+  height: 25px;
 }
 
 @media (max-width: 768px) {
