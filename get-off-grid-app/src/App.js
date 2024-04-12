@@ -59,7 +59,7 @@ function App() {
     if (numRails !== 0 && numRails === 2) {
       return numRails * 5;
     } else if (numRails !== 0 && numRails > 2) {
-      return numRails * 5 - 2; //NEED FIXING TUNE ME 
+      return numRails * 5 - 2; //NEED FIXING TUNE ME [only works for 1 String {Array of panel}]
     }
   }
 
@@ -82,67 +82,63 @@ function App() {
   };
 
   return (
-    <div>
-      <h1>Get-OFF-Grid Component Calculator</h1>
-      <div>
-        <label>
-          Client Name:
-          <input
-            type="text"
-            value={clientName}
-            onChange={(e) => setClientName(e.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          Number of Panels:
-          <input
-            type="text"
-            value={numPanels}
-            onChange={(e) => setNumPanels(e.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          Number of Strings:
-          <input
-            type="text"
-            value={numStrings}
-            onChange={(e) => setNumStrings(e.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          Orientation:
+    <div className="calculator-container">
+      <div className="card input-card">
+        <h1>Get-OFF-Grid Component Calculator</h1>
+        <div className="input-group">
           <label>
+            Client Name:
             <input
-              type="radio"
-              value="Portrait"
-              checked={orientation === 'Portrait'}
-              onChange={() => setOrientation('Portrait')}
+              type="text"
+              value={clientName}
+              onChange={(e) => setClientName(e.target.value)}
             />
-            Portrait
           </label>
           <label>
+            Number of Panels:
             <input
-              type="radio"
-              value="Landscape"
-              checked={orientation === 'Landscape'}
-              onChange={() => setOrientation('Landscape')}
+              type="text"
+              value={numPanels}
+              onChange={(e) => setNumPanels(e.target.value)}
             />
-            Landscape
           </label>
-        </label>
-      </div>
-      <div>
-        <button onClick={handleCalculate}>Calculate</button>
-        <button onClick={handleClear}>Clear</button>
+          <label>
+            Number of Strings:
+            <input
+              type="text"
+              value={numStrings}
+              onChange={(e) => setNumStrings(e.target.value)}
+            />
+          </label>
+          <label>
+            Orientation:
+            <label>
+              <input
+                type="radio"
+                value="Portrait"
+                checked={orientation === 'Portrait'}
+                onChange={() => setOrientation('Portrait')}
+              />
+              Portrait
+            </label>
+            <label>
+              <input
+                type="radio"
+                value="Landscape"
+                checked={orientation === 'Landscape'}
+                onChange={() => setOrientation('Landscape')}
+              />
+              Landscape
+            </label>
+          </label>
+        </div>
+        <div className="button-group">
+          <button onClick={handleCalculate}>Calculate</button>
+          <button onClick={handleClear}>Clear</button>
+        </div>
       </div>
       {result && (
-        <div>
+        <div className="card output-card">
           <h3>Invoice</h3>
           <p>Client Name: {result.clientName}</p>
           <p>Number of Panels: {result.numPanels}</p>
