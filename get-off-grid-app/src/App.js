@@ -117,6 +117,7 @@ function App() {
             Orientation:
             <label>
               <input
+                className="radioButton"
                 type="radio"
                 value="Portrait"
                 checked={orientation === 'Portrait'}
@@ -126,6 +127,7 @@ function App() {
             </label>
             <label>
               <input
+                className="radioButton"
                 type="radio"
                 value="Landscape"
                 checked={orientation === 'Landscape'}
