@@ -68,10 +68,10 @@ function App() {
     if (numRails !== 0 && numRails < 4) {
       return 0;
     } else if (numRails !== 0 && numRails > 2) {
-      return numRails * 5 - 2; 
+      let x = Math.round(numRails / 4);
+      return x * 2;   //NEED FIXING TUNE ME  [handle more then 1 string]
     }
   }
-
 
   const handleClear = () => {
     setClientName('');
