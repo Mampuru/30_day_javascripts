@@ -21,6 +21,7 @@
 .output-card {
   background-color: #eed76d;
   color: #032455;
+  border-radius: 20px;
 }
 
 .input-group {

@@ -7,6 +7,7 @@ function App() {
   const [numStrings, setNumStrings] = useState(1);
   const [orientation, setOrientation] = useState('Portrait');
   const [result, setResult] = useState(null);
+  const [endClamp, setEndClamp] = useState(null);
   
   const handleCalculate = () => {
     const inputData = {
@@ -16,7 +17,8 @@ function App() {
       orientation,
     };
     setResult(inputData);
-
+    const endClamps = calEndClamps(numStrings);
+    setEndClamp(endClamps);
   };
 
   //Function that calcualtes the number of end clamps
@@ -79,6 +81,7 @@ function App() {
     setNumStrings(1);
     setOrientation('Portrait');
     setResult(null);
+    setEndClamp("");
   };
 
   return (
@@ -149,6 +152,14 @@ function App() {
           <p>Number of Panels: {result.numPanels}</p>
           <p>Number of Strings: {result.numStrings}</p>
           <p>Orientation: {result.orientation}</p>
+
+          <h3>No. Components</h3>
+          <p>{result.clientName} x  Rails</p>
+          <p>{endClamp} x  End Clamps</p>
+          <p>{result.clientName} x  Center Clamps</p>
+          <p>{result.clientName} x  Splices</p>
+          <p>{result.clientName} x  Roof Hooks</p>
+          <p>{result.numPanels} x  Panels</p>
         </div>
       )}
     </div>
