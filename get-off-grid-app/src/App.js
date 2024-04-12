@@ -89,6 +89,7 @@ function App() {
           <label>
             Client Name:
             <input
+              className="textbox"
               type="text"
               value={clientName}
               onChange={(e) => setClientName(e.target.value)}
@@ -97,6 +98,7 @@ function App() {
           <label>
             Number of Panels:
             <input
+              className="textbox"
               type="text"
               value={numPanels}
               onChange={(e) => setNumPanels(e.target.value)}
@@ -105,6 +107,7 @@ function App() {
           <label>
             Number of Strings:
             <input
+              className="textbox"
               type="text"
               value={numStrings}
               onChange={(e) => setNumStrings(e.target.value)}
