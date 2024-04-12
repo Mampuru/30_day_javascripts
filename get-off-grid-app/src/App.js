@@ -9,6 +9,7 @@ function App() {
   const [result, setResult] = useState(null);
   const [endClamp, setEndClamp] = useState(null);
   const [rail, setRails] = useState(null);
+  const [centreClamp, setCentreClamps] = useState(null);
   
   const handleCalculate = () => {
     const inputData = {
@@ -20,10 +21,12 @@ function App() {
     
     const endClamps = calEndClamps(numStrings);
     const rails = calRails();
+    const centreClamps = calCenterClamps();
 
     setResult(inputData);
     setEndClamp(endClamps);
-    setRails(rails)
+    setRails(rails);
+    setCentreClamps(centreClamps)
   };
 
   //Function that calcualtes the number of end clamps
@@ -34,7 +37,7 @@ function App() {
   //Function to calculate the number of center clamps
   const calCenterClamps = () => {
     var numCenterClamp = 0;
-    if (numPanels.isNan) {
+    if (numPanels !== 0) {
       return numCenterClamp = numPanels * 2 - 2
     }
     return numCenterClamp;
@@ -167,7 +170,7 @@ function App() {
           <h3>No. Components</h3>
           <p>{rail} x  Rails</p>
           <p>{endClamp} x  End Clamps</p>
-          <p>{result.clientName} x  Centre Clamps</p>
+          <p>{centreClamp} x  Centre Clamps</p>
           <p>{result.clientName} x  Splices</p>
           <p>{result.clientName} x  Roof Hooks</p>
           <p>{result.numPanels} x  Panels</p>
