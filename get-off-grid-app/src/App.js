@@ -1,7 +1,6 @@
 import './App.css';
-import React, { useState,useRef} from 'react';
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
+import React, { useState, useRef } from 'react';
+import { PDFDownloadLink, Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
 
 function App() {
   const [clientName, setClientName] = useState('');
@@ -15,7 +14,26 @@ function App() {
   const [roofHook, setRoofHooks] = useState(null);
   const [splice, setSplice] = useState(null);
   const outputCardRef = useRef(null);
-  
+
+
+  const styles = StyleSheet.create({
+    card: {
+      width: '45%',
+      margin: '1%',
+      padding: '20px',
+      boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+    },
+    downloadButton: {
+      padding: '10px',
+      cursor: 'pointer',
+      backgroundColor: 'blue',
+      color: 'yellow',
+      border: 'none',
+      borderRadius: '4px',
+      marginTop: '20px',
+    },
+  });
+
   const handleCalculate = () => {
     const inputData = {
       clientName,
@@ -23,12 +41,12 @@ function App() {
       numStrings,
       orientation,
     };
-    
+
     const endClamps = calEndClamps(numStrings);
     const rails = calRails();
     const centreClamps = calCenterClamps();
     const splices = calSplice(rails);
-    const roofHooks = calRoofHooks(rails,splices);
+    const roofHooks = calRoofHooks(rails, splices);
 
     setResult(inputData);
     setEndClamp(endClamps);
@@ -63,15 +81,15 @@ function App() {
         }
       } else if (orientation === "Portrait") {
         if (numPanels % 4 === 0) {
-          return numPanels/2;
+          return numPanels / 2;
         } else if (numPanels % 4 === 2 || numPanels % 4 === 3) {
           let x = Math.round(numPanels / 4);
           return x * 2;
         } else if (numPanels % 4 === 1) {
           let y = Math.round(numPanels / 4 * 2);
           return y + 1;
-        }else {
-        
+        } else {
+
         }
       }
     }
@@ -79,11 +97,11 @@ function App() {
   }
 
   //Function to calculates number of roof hooks
-  const calRoofHooks = (numRails,numSpice) => {
+  const calRoofHooks = (numRails, numSpice) => {
     if (numRails !== 0 && numRails === 2) {
       return numRails * 5;
     } else if (numRails !== 0 && numRails > 2) {
-      return numRails * 5 - numSpice; 
+      return numRails * 5 - numSpice;
     }
   }
 
@@ -97,17 +115,28 @@ function App() {
     }
   }
 
-  const handleDownload = () => {
-    if (outputCardRef.current) {
-      html2canvas(outputCardRef.current).then((canvas) => {
-        const imgData = canvas.toDataURL('image/png');
-        const pdf = new jsPDF();
-        const imgHeight = (canvas.height * 208) / canvas.width;
-        pdf.addImage(imgData, 'PNG', 0, 0, 208, imgHeight);
-        pdf.save('output-card.pdf');
-      });
-    }
-  };
+  const MyDocument = () => (
+    <Document>
+      <Page size="A4">
+        <View style={styles.card}>
+          <Text>Invoice</Text>
+          <Text>Client Name: {result.clientName}</Text>
+          <Text>Number of Panels: {result.numPanels}</Text>
+          <Text>Number of Strings: {result.numStrings}</Text>
+          <Text>Orientation: {result.orientation}</Text>
+
+          <Text>No. Components</Text>
+          <Text>{rail} x  Rails</Text>
+          <Text>{endClamp} x  End Clamps</Text>
+          <Text>{centreClamp} x  Centre Clamps</Text>
+          <Text>{splice} x  Splices</Text>
+          <Text>{roofHook} x  Roof Hooks</Text>
+          <Text>{result.numPanels} x  Panels</Text>
+
+        </View>
+      </Page>
+    </Document>
+  );
 
   const handleClear = () => {
     setClientName('');
@@ -125,7 +154,7 @@ function App() {
   return (
     <div className="calculator-container">
       <div className="card input-card">
-        <h1>Get-OFF-Grid Component Calculator</h1>
+        <h1>GOG Component Calculator</h1>
         <div className="input-group">
           <label>
             Client Name:
@@ -183,9 +212,9 @@ function App() {
           <button onClick={handleClear}>Clear</button>
         </div>
       </div>
-     
+
       {result && (
-        <div className="card output-card"  ref={outputCardRef}>
+        <div className="card output-card" ref={outputCardRef}>
           <h3>Quote</h3>
           <p>Client Name: {result.clientName}</p>
           <p>Number of Panels: {result.numPanels}</p>
@@ -200,13 +229,12 @@ function App() {
           <p>{roofHook} x  Roof Hooks</p>
           <p>{result.numPanels} x  Panels</p>
 
-          <button className="download-button" onClick={handleDownload}>
-            Download
-          </button>
+          <PDFDownloadLink document={<MyDocument />} fileName="output-card.pdf">
+            {({ blob, url, loading, error }) => (loading ? 'Loading document...' : 'Download PDF')}
+          </PDFDownloadLink>
         </div>
       )}
-  
-      </div>
+    </div>
   );
 }
 
