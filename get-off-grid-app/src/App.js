@@ -1,5 +1,7 @@
 import './App.css';
-import React, { useState } from 'react';
+import React, { useState,useRef} from 'react';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 function App() {
   const [clientName, setClientName] = useState('');
@@ -12,6 +14,7 @@ function App() {
   const [centreClamp, setCentreClamps] = useState(null);
   const [roofHook, setRoofHooks] = useState(null);
   const [splice, setSplice] = useState(null);
+  const outputCardRef = useRef(null);
   
   const handleCalculate = () => {
     const inputData = {
@@ -94,6 +97,18 @@ function App() {
     }
   }
 
+  const handleDownload = () => {
+    if (outputCardRef.current) {
+      html2canvas(outputCardRef.current).then((canvas) => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF();
+        const imgHeight = (canvas.height * 208) / canvas.width;
+        pdf.addImage(imgData, 'PNG', 0, 0, 208, imgHeight);
+        pdf.save('output-card.pdf');
+      });
+    }
+  };
+
   const handleClear = () => {
     setClientName('');
     setNumPanels('');
@@ -168,9 +183,10 @@ function App() {
           <button onClick={handleClear}>Clear</button>
         </div>
       </div>
+     
       {result && (
-        <div className="card output-card">
-          <h3>Invoice</h3>
+        <div className="card output-card"  ref={outputCardRef}>
+          <h3>Quote</h3>
           <p>Client Name: {result.clientName}</p>
           <p>Number of Panels: {result.numPanels}</p>
           <p>Number of Strings: {result.numStrings}</p>
@@ -183,9 +199,14 @@ function App() {
           <p>{splice} x  Splices</p>
           <p>{roofHook} x  Roof Hooks</p>
           <p>{result.numPanels} x  Panels</p>
+
+          <button className="download-button" onClick={handleDownload}>
+            Download
+          </button>
         </div>
       )}
-    </div>
+  
+      </div>
   );
 }
 
