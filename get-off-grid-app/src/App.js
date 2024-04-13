@@ -10,6 +10,7 @@ function App() {
   const [endClamp, setEndClamp] = useState(null);
   const [rail, setRails] = useState(null);
   const [centreClamp, setCentreClamps] = useState(null);
+  const [roofHook, setRoofHooks] = useState(null);
   
   const handleCalculate = () => {
     const inputData = {
@@ -22,11 +23,13 @@ function App() {
     const endClamps = calEndClamps(numStrings);
     const rails = calRails();
     const centreClamps = calCenterClamps();
+    const roofHooks = calRoofHooks(rails);
 
     setResult(inputData);
     setEndClamp(endClamps);
     setRails(rails);
-    setCentreClamps(centreClamps)
+    setCentreClamps(centreClamps);
+    setRoofHooks(roofHooks);
   };
 
   //Function that calcualtes the number of end clamps
@@ -70,20 +73,20 @@ function App() {
   }
 
   //Function to calculates number of roof hooks
-  const calRoofHooks = (numRails) => {
-    if (numRails !== 0 && numRails === 2) {
-      return numRails * 5;
-    } else if (numRails !== 0 && numRails > 2) {
-      return numRails * 5 - 2; //NEED FIXING TUNE ME [only works for 1 String {Array of panel}]
+  const calRoofHooks = (numSpice) => {
+    if (rail !== 0 && rail === 2) {
+      return rail * 5;
+    } else if (rail !== 0 && rail > 2) {
+      return rail * 5 - numSpice; 
     }
   }
 
   //Function that calculates the number of splices
-  const calSplice = (numRails,numStrings) => {
-    if (numRails !== 0 && numRails < 4) {
+  const calSplice = () => {
+    if (rail !== 0 && rail < 4) {
       return 0;
-    } else if (numRails !== 0 && numRails > 2) {
-      let x = Math.round(numRails / 4);
+    } else if (rail !== 0 && rail > 2) {
+      let x = Math.round(rail / 4);
       return x * 2;   //NEED FIXING TUNE ME  [handle more then 1 string]
     }
   }
@@ -96,6 +99,8 @@ function App() {
     setResult(null);
     setEndClamp("");
     setRails("");
+    setCentreClamps("");
+    setRoofHooks("")
   };
 
   return (
@@ -172,7 +177,7 @@ function App() {
           <p>{endClamp} x  End Clamps</p>
           <p>{centreClamp} x  Centre Clamps</p>
           <p>{result.clientName} x  Splices</p>
-          <p>{result.clientName} x  Roof Hooks</p>
+          <p>{roofHook} x  Roof Hooks</p>
           <p>{result.numPanels} x  Panels</p>
         </div>
       )}
