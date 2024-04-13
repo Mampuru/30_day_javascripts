@@ -125,7 +125,7 @@ function App() {
             Number of Panels:
             <input
               className="textbox"
-              type="text"
+              type="number"
               value={numPanels}
               onChange={(e) => setNumPanels(e.target.value)}
             />
@@ -134,7 +134,7 @@ function App() {
             Number of Strings:
             <input
               className="textbox"
-              type="text"
+              type="number"
               value={numStrings}
               onChange={(e) => setNumStrings(e.target.value)}
             />
