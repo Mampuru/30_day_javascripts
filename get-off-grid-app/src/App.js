@@ -23,6 +23,17 @@ function App() {
       padding: '20px',
       boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
     },
+    title:{
+      fontSize: 24,
+      marginBottom: 10,
+    },
+    normal:{
+      fontSize: 14,
+    },
+    normalEnd:{
+      fontSize: 14,
+      marginBottom: 40,
+    },
     downloadButton: {
       padding: '10px',
       cursor: 'pointer',
@@ -119,19 +130,19 @@ function App() {
     <Document>
       <Page size="A4">
         <View style={styles.card}>
-          <Text>Invoice</Text>
-          <Text>Client Name: {result.clientName}</Text>
-          <Text>Number of Panels: {result.numPanels}</Text>
-          <Text>Number of Strings: {result.numStrings}</Text>
-          <Text>Orientation: {result.orientation}</Text>
+          <Text style={styles.title}>Invoice</Text>
+          <Text style={styles.normal}>Client Name: {result.clientName}</Text>
+          <Text style={styles.normal}>Number of Panels: {result.numPanels}</Text>
+          <Text style={styles.normal}>Number of Strings: {result.numStrings}</Text>
+          <Text style={styles.normalEnd}>Orientation: {result.orientation}</Text>
 
-          <Text>No. Components</Text>
-          <Text>{rail} x  Rails</Text>
-          <Text>{endClamp} x  End Clamps</Text>
-          <Text>{centreClamp} x  Centre Clamps</Text>
-          <Text>{splice} x  Splices</Text>
-          <Text>{roofHook} x  Roof Hooks</Text>
-          <Text>{result.numPanels} x  Panels</Text>
+          <Text style={styles.title}>No. Components</Text>
+          <Text style={styles.normal}>{rail} x  Rails</Text>
+          <Text style={styles.normal}>{endClamp} x  End Clamps</Text>
+          <Text style={styles.normal}>{centreClamp} x  Centre Clamps</Text>
+          <Text style={styles.normal}>{splice} x  Splices</Text>
+          <Text style={styles.normal}>{roofHook} x  Roof Hooks</Text>
+          <Text style={styles.normal}>{result.numPanels} x  Panels</Text>
 
         </View>
       </Page>
