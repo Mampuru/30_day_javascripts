@@ -43,6 +43,10 @@ function App() {
       borderRadius: '4px',
       marginTop: '20px',
     },
+    dateTime: {
+      fontSize: '14px',
+      marginBottom: '40px',
+    }
   });
 
   const handleCalculate = () => {
@@ -126,28 +130,41 @@ function App() {
     }
   }
 
-  const MyDocument = () => (
-    <Document>
-      <Page size="A4">
-        <View style={styles.card}>
-          <Text style={styles.title}>Invoice</Text>
-          <Text style={styles.normal}>Client Name: {result.clientName}</Text>
-          <Text style={styles.normal}>Number of Panels: {result.numPanels}</Text>
-          <Text style={styles.normal}>Number of Strings: {result.numStrings}</Text>
-          <Text style={styles.normalEnd}>Orientation: {result.orientation}</Text>
+  const MyDocument = () => {
+    const currentDate = new Date().toLocaleDateString();
+    const currentTime = new Date().toLocaleTimeString();
+  
+    return (
+      <Document>
+        <Page size="A4">
+          <View style={styles.card}>
+            
+            {/* Invoice Title */}
+            <Text style={styles.title}>Invoice</Text>
+  
+            {/* Client Details */}
+            <Text style={styles.normal}>Client Name: {result.clientName}</Text>
+            <Text style={styles.normal}>Number of Panels: {result.numPanels}</Text>
+            <Text style={styles.normal}>Number of Strings: {result.numStrings}</Text>
+            <Text style={styles.normal}>Orientation: {result.orientation}</Text>
+  
+            {/* Current Date and Time */}
+            <Text style={styles.dateTime}>Date: {currentDate} {currentTime}</Text>
+  
+            {/* No. Components Table */}
 
-          <Text style={styles.title}>No. Components</Text>
-          <Text style={styles.normal}>{rail} x  Rails</Text>
-          <Text style={styles.normal}>{endClamp} x  End Clamps</Text>
-          <Text style={styles.normal}>{centreClamp} x  Centre Clamps</Text>
-          <Text style={styles.normal}>{splice} x  Splices</Text>
-          <Text style={styles.normal}>{roofHook} x  Roof Hooks</Text>
-          <Text style={styles.normal}>{result.numPanels} x  Panels</Text>
-
-        </View>
-      </Page>
-    </Document>
-  );
+              <Text style={styles.title}>No. Components</Text>
+              <Text style={styles.normal}>{rail} x  Rails</Text>
+              <Text style={styles.normal}>{endClamp} x  End Clamps</Text>
+              <Text style={styles.normal}>{centreClamp} x  Centre Clamps</Text>
+              <Text style={styles.normal}>{splice} x  Splices</Text>
+              <Text style={styles.normal}>{roofHook} x  Roof Hooks</Text>
+              <Text style={styles.normal}>{result.numPanels} x  Panels</Text>
+          </View>
+        </Page>
+      </Document>
+    );
+  };
 
   const handleClear = () => {
     setClientName('');
