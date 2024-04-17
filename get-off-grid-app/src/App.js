@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useState, useRef } from 'react';
-import { PDFDownloadLink, Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
+import { PDFDownloadLink, Document, Page, Text, View, StyleSheet,Image } from '@react-pdf/renderer';
 
 function App() {
   const [clientName, setClientName] = useState('');
@@ -17,36 +17,45 @@ function App() {
 
 
   const styles = StyleSheet.create({
-    card: {
-      width: '45%',
-      margin: '1%',
+    page: {
+      flexDirection: 'column',
       padding: '20px',
-      boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
     },
-    title:{
-      fontSize: 24,
-      marginBottom: 10,
+    header: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      marginBottom: '20px',
     },
-    normal:{
-      fontSize: 14,
+    logo: {
+      width: '100px',
     },
-    normalEnd:{
-      fontSize: 14,
-      marginBottom: 40,
+    title: {
+      fontSize: '18px',
+      marginBottom: '10px',
+     
     },
-    downloadButton: {
-      padding: '10px',
-      cursor: 'pointer',
-      backgroundColor: 'blue',
-      color: 'yellow',
-      border: 'none',
-      borderRadius: '4px',
-      marginTop: '20px',
+    section: {
+      marginBottom: '20px',
+    },
+    row: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+    },
+    label: {
+      fontSize: '14px',
+      width: '45%',
+      fontWeight: "bold",
+    },
+    value: {
+      fontSize: '14px',
+      width: '45%',
     },
     dateTime: {
-      fontSize: '14px',
-      marginBottom: '40px',
-    }
+      fontSize: '12px',
+      textAlign: 'right',
+      marginBottom: '10px',
+    },
   });
 
   const handleCalculate = () => {
@@ -136,30 +145,77 @@ function App() {
   
     return (
       <Document>
-        <Page size="A4">
-          <View style={styles.card}>
-            
-            {/* Invoice Title */}
-            <Text style={styles.title}>Invoice</Text>
+        <Page size="A4" style={styles.page}>
+          {/* Header */}
+          <View style={styles.header}>
+            {/* Logo */}
+            <Image style={styles.logo} src="/path/to/logo.png" />
   
-            {/* Client Details */}
-            <Text style={styles.normal}>Client Name: {result.clientName}</Text>
-            <Text style={styles.normal}>Number of Panels: {result.numPanels}</Text>
-            <Text style={styles.normal}>Number of Strings: {result.numStrings}</Text>
-            <Text style={styles.normal}>Orientation: {result.orientation}</Text>
+            {/* Date and Time */}
+            <Text style={styles.dateTime}>{currentDate} {currentTime}</Text>
+          </View>
   
-            {/* Current Date and Time */}
-            <Text style={styles.dateTime}>Date: {currentDate} {currentTime}</Text>
+          {/* Invoice Title */}
+          <Text style={styles.title}>Invoice</Text>
   
-            {/* No. Components Table */}
-
-              <Text style={styles.title}>No. Components</Text>
-              <Text style={styles.normal}>{rail} x  Rails</Text>
-              <Text style={styles.normal}>{endClamp} x  End Clamps</Text>
-              <Text style={styles.normal}>{centreClamp} x  Centre Clamps</Text>
-              <Text style={styles.normal}>{splice} x  Splices</Text>
-              <Text style={styles.normal}>{roofHook} x  Roof Hooks</Text>
-              <Text style={styles.normal}>{result.numPanels} x  Panels</Text>
+          {/* Client Details Section */}
+          <View style={styles.section}>
+            <Text style={styles.title}>Client Details</Text>
+  
+            <View style={styles.row}>
+              <Text style={styles.label}>Client Name:</Text>
+              <Text style={styles.value}>{result.clientName}</Text>
+            </View>
+  
+            <View style={styles.row}>
+              <Text style={styles.label}>Number of Panels:</Text>
+              <Text style={styles.value}>{result.numPanels}</Text>
+            </View>
+  
+            <View style={styles.row}>
+              <Text style={styles.label}>Number of Strings:</Text>
+              <Text style={styles.value}>{result.numStrings}</Text>
+            </View>
+  
+            <View style={styles.row}>
+              <Text style={styles.label}>Orientation:</Text>
+              <Text style={styles.value}>{result.orientation}</Text>
+            </View>
+          </View>
+  
+          {/* No. Components Section */}
+          <View style={styles.section}>
+            <Text style={styles.title}>No. Components</Text>
+  
+            <View style={styles.row}>
+              <Text style={styles.label}>{rail} x Rails</Text>
+              {/* <Text style={styles.value}>{rail}</Text> */}
+            </View>
+  
+            <View style={styles.row}>
+              <Text style={styles.label}>{endClamp} x End Clamps</Text>
+              {/* <Text style={styles.value}>{endClamp}</Text> */}
+            </View>
+  
+            <View style={styles.row}>
+              <Text style={styles.label}>{centreClamp} x Centre Clamps</Text>
+              {/* <Text style={styles.value}>{centreClamp}</Text> */}
+            </View>
+  
+            <View style={styles.row}>
+              <Text style={styles.label}>{splice} x Splices</Text>
+              {/* <Text style={styles.value}>{splice}</Text> */}
+            </View>
+  
+            <View style={styles.row}>
+              <Text style={styles.label}>{roofHook} x Roof Hooks</Text>
+              {/* <Text style={styles.value}>{roofHook}</Text> */}
+            </View>
+  
+            <View style={styles.row}>
+              <Text style={styles.label}>{result.numPanels} x Panels</Text>
+              {/* <Text style={styles.value}>{result.numPanels}</Text> */}
+            </View>
           </View>
         </Page>
       </Document>
