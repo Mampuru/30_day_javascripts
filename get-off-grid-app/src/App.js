@@ -188,32 +188,26 @@ function App() {
 
             <View style={styles.row}>
               <Text style={styles.label}>{rail} x Rails</Text>
-              {/* <Text style={styles.value}>{rail}</Text> */}
             </View>
 
             <View style={styles.row}>
               <Text style={styles.label}>{endClamp} x End Clamps</Text>
-              {/* <Text style={styles.value}>{endClamp}</Text> */}
             </View>
 
             <View style={styles.row}>
               <Text style={styles.label}>{centreClamp} x Centre Clamps</Text>
-              {/* <Text style={styles.value}>{centreClamp}</Text> */}
             </View>
 
             <View style={styles.row}>
               <Text style={styles.label}>{splice} x Splices</Text>
-              {/* <Text style={styles.value}>{splice}</Text> */}
             </View>
 
             <View style={styles.row}>
               <Text style={styles.label}>{roofHook} x Roof Hooks</Text>
-              {/* <Text style={styles.value}>{roofHook}</Text> */}
             </View>
 
             <View style={styles.row}>
               <Text style={styles.label}>{result.numPanels} x Panels</Text>
-              {/* <Text style={styles.value}>{result.numPanels}</Text> */}
             </View>
           </View>
         </Page>
@@ -315,10 +309,6 @@ function App() {
             <label style={styles.label}>Orientation: </label>
             <label style={styles.value}>{result.orientation}</label>
           </div>
-          {/* <p>Client Name: {result.clientName}</p>
-          <p>Number of Panels: {result.numPanels}</p>
-          <p>Number of Strings: {result.numStrings}</p>
-          <p>Orientation: {result.orientation}</p> */}
 
           <h3>No. Components</h3>
           <p>{rail} x  Rails</p>
