@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useState, useRef } from 'react';
-import { PDFDownloadLink, Document, Page, Text, View, StyleSheet,Image } from '@react-pdf/renderer';
+import { PDFDownloadLink, Document, Page, Text, View, StyleSheet, Image } from '@react-pdf/renderer';
 
 function App() {
   const [clientName, setClientName] = useState('');
@@ -33,7 +33,6 @@ function App() {
     title: {
       fontSize: '18px',
       marginBottom: '10px',
-     
     },
     section: {
       marginBottom: '20px',
@@ -142,7 +141,7 @@ function App() {
   const MyDocument = () => {
     const currentDate = new Date().toLocaleDateString();
     const currentTime = new Date().toLocaleTimeString();
-  
+
     return (
       <Document>
         <Page size="A4" style={styles.page}>
@@ -150,68 +149,68 @@ function App() {
           <View style={styles.header}>
             {/* Logo */}
             <Image style={styles.logo} src="/path/to/logo.png" />
-  
+
             {/* Date and Time */}
             <Text style={styles.dateTime}>{currentDate} {currentTime}</Text>
           </View>
-  
+
           {/* Invoice Title */}
           <Text style={styles.title}>Invoice</Text>
-  
+
           {/* Client Details Section */}
           <View style={styles.section}>
             <Text style={styles.title}>Client Details</Text>
-  
+
             <View style={styles.row}>
               <Text style={styles.label}>Client Name:</Text>
               <Text style={styles.value}>{result.clientName}</Text>
             </View>
-  
+
             <View style={styles.row}>
               <Text style={styles.label}>Number of Panels:</Text>
               <Text style={styles.value}>{result.numPanels}</Text>
             </View>
-  
+
             <View style={styles.row}>
               <Text style={styles.label}>Number of Strings:</Text>
               <Text style={styles.value}>{result.numStrings}</Text>
             </View>
-  
+
             <View style={styles.row}>
               <Text style={styles.label}>Orientation:</Text>
               <Text style={styles.value}>{result.orientation}</Text>
             </View>
           </View>
-  
+
           {/* No. Components Section */}
           <View style={styles.section}>
             <Text style={styles.title}>No. Components</Text>
-  
+
             <View style={styles.row}>
               <Text style={styles.label}>{rail} x Rails</Text>
               {/* <Text style={styles.value}>{rail}</Text> */}
             </View>
-  
+
             <View style={styles.row}>
               <Text style={styles.label}>{endClamp} x End Clamps</Text>
               {/* <Text style={styles.value}>{endClamp}</Text> */}
             </View>
-  
+
             <View style={styles.row}>
               <Text style={styles.label}>{centreClamp} x Centre Clamps</Text>
               {/* <Text style={styles.value}>{centreClamp}</Text> */}
             </View>
-  
+
             <View style={styles.row}>
               <Text style={styles.label}>{splice} x Splices</Text>
               {/* <Text style={styles.value}>{splice}</Text> */}
             </View>
-  
+
             <View style={styles.row}>
               <Text style={styles.label}>{roofHook} x Roof Hooks</Text>
               {/* <Text style={styles.value}>{roofHook}</Text> */}
             </View>
-  
+
             <View style={styles.row}>
               <Text style={styles.label}>{result.numPanels} x Panels</Text>
               {/* <Text style={styles.value}>{result.numPanels}</Text> */}
@@ -299,11 +298,27 @@ function App() {
 
       {result && (
         <div className="card output-card" ref={outputCardRef}>
-          <h3>Quote</h3>
-          <p>Client Name: {result.clientName}</p>
+          <h3>Client Details</h3>
+          <div style={styles.row}>
+            <label style={styles.label}>Client Name: </label>
+            <label style={styles.value}>{result.clientName}</label>
+          </div>
+          <div style={styles.row}>
+            <label style={styles.label}>Number of Panels:</label>
+            <label style={styles.value}>{result.numPanels}</label>
+          </div>
+          <div style={styles.row}>
+            <label style={styles.label}>Number of Strings: </label>
+            <label style={styles.value}>{result.numStrings}</label>
+          </div>
+          <div style={styles.row}>
+            <label style={styles.label}>Orientation: </label>
+            <label style={styles.value}>{result.orientation}</label>
+          </div>
+          {/* <p>Client Name: {result.clientName}</p>
           <p>Number of Panels: {result.numPanels}</p>
           <p>Number of Strings: {result.numStrings}</p>
-          <p>Orientation: {result.orientation}</p>
+          <p>Orientation: {result.orientation}</p> */}
 
           <h3>No. Components</h3>
           <p>{rail} x  Rails</p>
