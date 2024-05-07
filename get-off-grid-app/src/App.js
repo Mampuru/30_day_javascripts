@@ -130,9 +130,10 @@ function App() {
 
   //Function that calculates the number of splices
   const calSplice = (numRails) => {
-    if (numRails !== 0 && numRails < 4) {
+    if (numRails !== 0 && numRails < 4 ) {
       return 0;
     } else if (numRails !== 0 && numRails > 2) {
+      if(numRails === 4 && numStrings > 1) return 0;
       let x = Math.round(numRails / 4);
       return x * 2;   //NEED FIXING TUNE ME  [handle more then 1 string]
     }
