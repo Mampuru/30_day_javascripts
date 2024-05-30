@@ -32,7 +32,7 @@ export function SignupForm() {
           </ul>
         </div>
       )}
-      <SignupButton />
+      <SigninButton />
     </form>
   )
 }
