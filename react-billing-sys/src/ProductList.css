@@ -1,0 +1,19 @@
+/* src/ProjectList.css */
+.project-list {
+    margin: 20px;
+    text-align: left;
+  }
+  
+  .project-list ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .project-list li {
+    margin: 10px 0;
+  }
+  
+  .project-list button {
+    margin-left: 10px;
+  }
+  
