@@ -1,0 +1,20 @@
+/* src/Cart.css */
+.cart {
+    margin: 20px;
+    text-align: left;
+  }
+  
+  .cart ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .cart li {
+    margin: 10px 0;
+  }
+  
+  .cart-total {
+    font-weight: bold;
+    margin-top: 20px;
+  }
+  
