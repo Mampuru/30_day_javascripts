@@ -5,6 +5,9 @@ import './App.css';
 import BillingSystem from './BillingSystem';
 import SignUp from './SignUp';
 import Login from './Login';
+import ProductList from './ProductList';
+import Cart from './Cart';
+import Checkout from './Checkout';
 
 function App() {
   return (
@@ -15,6 +18,9 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
           <Route path="/billing" element={<BillingSystem />} />
+          <Route path="/products" element={<ProductList />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
         </Routes>
       </div>
     </Router>
@@ -22,5 +28,3 @@ function App() {
 }
 
 export default App;
-
-
